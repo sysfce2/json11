@@ -24,8 +24,10 @@ endif()
 
 add_library(json11 json11.cpp)
 target_include_directories(json11 PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_compile_options(json11
-  PRIVATE -fPIC -fno-rtti -fno-exceptions -Wall)
+if(NOT MSVC)
+  target_compile_options(json11
+    PRIVATE -fPIC -fno-rtti -fno-exceptions -Wall)
+endif()
 
 configure_file("json11.pc.in" "json11.pc" @ONLY)
 
